@@ -7,6 +7,7 @@
 	}
 
 	include("./Classes/FileSystem.php");
+	include("./Functions/Strings.php");
 
 	$file = new File("./products.json");
 
@@ -14,12 +15,17 @@
 
 	$magasin = $file->toJSON();
 
+
+	/**
+	 * New category
+	 */
 	if (isset($_POST["formsend_cat"]))
 	{
 		if (!empty($_POST["new_cat"]))
 		{
-			$new_cat = $_POST["new_cat"];
-			
+			$new_cat = strtolower($_POST["new_cat"]);
+			$new_cat = enleverAccents($new_cat);
+
 			$magasin->$new_cat = (object) null;
 
 			$write = $file->writeFile(json_encode($magasin));
@@ -31,6 +37,9 @@
 		}
 	}
 
+	/**
+	 * Delete category
+	 */
 	if (isset($_POST["formsend_del_cat"]))
 	{
 		if (!empty($_POST["del_cat"]))
@@ -49,6 +58,9 @@
 	}
 
 
+	/**
+	 * New Product
+	 */
 	if (isset($_POST["formsend_product"]))
 	{
 		if (!empty($_POST["new_prod_name"]) && !empty($_POST["new_prod_cat"]) && !empty($_POST["new_prod_qte"]))
@@ -86,6 +98,10 @@
 		}
 	}
 
+
+	/**
+	 * Delete Product
+	 */
 	if (isset($_GET["cat"]) && isset($_GET["key"]) && isset($_GET["value"]) && isset($_GET["method"]))
 	{
 		$cat = $_GET["cat"];

@@ -23,6 +23,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Magasin</title>
+		<?php include("includes.php"); ?>
 	</head>
 
 	<body class="bg-gray-50 text-gray-900 font-sans antialiased">
@@ -71,6 +72,5 @@
 		</div>
 
 		<?php include("menu.php"); ?>
-		<?php include("includes.php"); ?>
 	</body>
 </html>
